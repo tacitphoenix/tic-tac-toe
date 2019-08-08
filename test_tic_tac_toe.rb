@@ -36,4 +36,20 @@ class TestTicTacToe < Minitest::Test
   def test_invalid_turn
     refute TicTacToe.valid_turn("o x x   x")
   end
+
+  def test_valid_row_win
+    assert TicTacToe.row_win("   xxx   ")
+  end
+
+  def test_valid_column_win
+    assert TicTacToe.col_win("x  x  x  ")
+  end
+  
+  def test_valid_winner
+    assert TicTacToe.winner("  oxxxo  ")
+  end
+
+  def test_invalid_winner
+    refute TicTacToe.winner("ox  o xox")
+  end
 end

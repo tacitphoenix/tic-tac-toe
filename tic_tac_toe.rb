@@ -28,4 +28,26 @@ module TicTacToe
         ocnt = str.count("o")
         (xcnt - ocnt).abs < 2
     end
+
+    def self.winner(str)
+        row_win(str) || col_win(str)
+    end
+
+    def self.row_win(str)
+        board = to_board(str)
+        board.each do |row|
+            in_a_row = [row[0], row[1], row[2]]
+            return true if in_a_row.uniq.size < 2
+        end
+        return false
+    end
+
+    def self.col_win(str)
+        board = to_board(str)
+        (0..2).to_a.each do |col|
+            in_a_row = [board[0][col], board[1][col], board[2][col]]
+            return true if in_a_row.uniq.size < 2
+        end
+        false
+    end
 end
