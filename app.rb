@@ -8,7 +8,7 @@ get '/' do
         if response
             response
         else
-            halt 400
+            halt 400, 'Invalid Board'
         end
     else
         "Please submit a board"
