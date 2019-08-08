@@ -3,5 +3,14 @@ require_relative 'tic_tac_toe'
 
 get '/' do
     board = params['board']
-    TicTacToe.play(board)
+    if board
+        response = TicTacToe.play(board)
+        if response
+            response
+        else
+            halt 400
+        end
+    else
+        "Please submit a board"
+    end
 end
