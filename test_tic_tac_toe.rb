@@ -28,4 +28,12 @@ class TestTicTacToe < Minitest::Test
   def test_invalid_board
     refute TicTacToe.valid_board(@invalid_string)
   end
+
+  def test_valid_turn
+    assert TicTacToe.valid_turn(@valid_string)
+  end
+
+  def test_invalid_turn
+    refute TicTacToe.valid_turn("o x x   x")
+  end
 end

@@ -15,10 +15,17 @@ module TicTacToe
     def self.valid_board(str)
         chk_length = str.length == 9
         chk_chars = !str.match(/[^xo ]/)
-        if chk_length && chk_chars
+        chk_turn = valid_turn(str)
+        if chk_length && chk_chars && chk_turn
             true
         else
             false
         end
+    end
+
+    def self.valid_turn(str)
+        xcnt = str.count("x")
+        ocnt = str.count("o")
+        (xcnt - ocnt).abs < 2
     end
 end
