@@ -32,19 +32,32 @@ module TicTacToe
     end
 
     # game engine
+
     def self.server_move(str)
         board = to_board(str)
 
     end
 
-    # win conditions
-    def self.winner(str)
-        row_win(str) || col_win(str) || dia_win(str)
+    # strategies
+
+    def win
     end
 
-    def self.row_win(str)
-        rows(str).each{|row| return true if row.uniq.size < 2}
+    # win conditions
+    def self.winner(str)
+        all_paths(str).each{|row| return true if row.uniq.size < 2}
         return false
+    end
+
+    def self.all_paths(str)
+        rows(str) + cols(str) + dias(str)
+    end
+
+    def self.cols(str)
+        [].tap do |arr|
+            board = to_board(str)
+            (0..2).to_a.each{|col| arr << [board[0][col], board[1][col], board[2][col]]}
+        end
     end
 
     def self.rows(str)
@@ -52,23 +65,6 @@ module TicTacToe
             board = to_board(str)
             board.each{|row| arr << [row[0], row[1], row[2]]}
         end
-    end
-
-    def self.col_win(str)
-        cols(str).each{|col| return true if col.uniq.size < 2}
-        return false
-    end
-
-    def self.cols(str)
-        [].tap do |arr|
-            board = to_board(str)
-            (0..2).to_a.each{|col| [board[0][col], board[1][col], board[2][col]]}
-        end
-    end
-
-    def self.dia_win(str)
-        dias(str).each{|dia| return true if dia.uniq.size < 2}
-        return false
     end
 
     def self.dias(str)
