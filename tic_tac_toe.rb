@@ -33,20 +33,134 @@ module TicTacToe
 
     # game engine
 
-    def self.server_move(str)
-        board = to_board(str)
+    def self.play(str)
+        if valid_board(str)
+            # win
+            new_str = win(str)
+            return new_str if new_str != str
 
+            #block
+            new_str = block(str)
+            return new_str if new_str != str
+
+            #center
+            new_str = center(str)
+            return new_str if new_str != str
+
+            #empty_corner
+            new_str = empty_corner(str)
+            return new_str if new_str != str
+
+            #empty_side
+            new_str = empty_side(str)
+            return new_str if new_str != str
+        else
+            false
+        end
     end
 
     # strategies
 
-    def win
+    def self.win(str)
+        board = to_board(str)
+        all_paths(str).each_with_index do |row, n|
+            chk_str = row.join("")
+            if !chk_str.match(/x/) && chk_str.count("o") == 2
+                i = row.index(" ")
+                co_od = mapper[n][i]
+                board[co_od[0]][co_od[1]] = "o"
+            end
+        end
+        to_string(board)
+    end
+
+    def self.block(str)
+        board = to_board(str)
+        all_paths(str).each_with_index do |row, n|
+            chk_str = row.join("")
+            if !chk_str.match(/o/) && chk_str.count("x") == 2
+                i = row.index(" ")
+                co_od = mapper[n][i]
+                board[co_od[0]][co_od[1]] = "o"
+            end
+        end
+        to_string(board)
+    end
+
+    def self.fork(str)
+        # TODO: needs to be implemented
+    end
+
+    def self.block_fork(str)
+        # TODO: needs to be implemented
+    end
+
+    def self.center(str)
+        board = to_board(str)
+        board[1][1] = "o" if board[1][1] = " "
+        to_string(board)
+    end
+
+    def self.opposite_corner(str)
+        # TODO: needs to be implemented
+    end
+
+    def self.empty_corner(str)
+        board = to_board(str)
+        corners.each do |k,v|
+            x,y = v
+            board[x][y] = "o" if board[x][y] = " "
+            return to_string(board)
+        end
+        to_string(board)
+    end
+
+    def self.empty_side(str)
+        board = to_board(str)
+        middle_sides.each do |k,v|
+            x,y = v
+            board[x][y] = "o" if board[x][y] = " "
+            return to_string(board)
+        end
+        to_string(board)
     end
 
     # win conditions
+
     def self.winner(str)
         all_paths(str).each{|row| return true if row.uniq.size < 2}
         return false
+    end
+
+    def self.mapper
+        {
+            0 => [[0,0], [0,1], [0, 2]],
+            1 => [[1,0], [1,1], [1, 2]],
+            2 => [[2,0], [2,1], [2, 2]],
+            3 => [[0,0], [1,0], [2, 0]],
+            4 => [[0,1], [1,1], [2, 1]],
+            5 => [[0,2], [1,2], [2, 2]],
+            6 => [[0,0], [1,1], [2, 2]],
+            7 => [[2,0], [1,1], [0, 2]]
+        }
+    end
+
+    def self.corners
+        {
+            0 => [0,0],
+            1 => [0,2],
+            2 => [2,0],
+            3 => [2,2]
+        }
+    end
+
+    def self.middle_sides
+        {
+            0 => [0,1],
+            1 => [1,0],
+            2 => [1,2],
+            3 => [2,1]
+        }
     end
 
     def self.all_paths(str)

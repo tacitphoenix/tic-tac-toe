@@ -4,8 +4,9 @@
 
 1. Interface for providing board as url string
 2. Validation and plausibility of board string
-4. Win conditions part of the game engine
-3. Test to verify the above
+3. Win conditions part of the game engine
+4. Test to verify the above
+5. Next move part of the game engine
 
 # Tests
 
@@ -14,9 +15,8 @@ ruby test_tic_tac_toe.rb
 
 ## Pending
 
-1. Next move part of the game engine
-2. Convert to Sinatra (Ruby Micro Webframework)
-3. Deploy on Heroku
+1. Convert to Sinatra (Ruby Micro Webframework)
+2. Deploy on Heroku
 
 ## Thoughts
 
@@ -29,3 +29,5 @@ I generally prefer TDD on programs that require some intertwined logic this take
 a little bit of time to setup but as I progress it enabled me to make some
 sweeping refactors. I have documented my progress as the zip file is a local
 git repo and stopped at the recommended 2 hour mark.
+
+Proceeded with additional development after the 2 hour mark in the spirit of completeness

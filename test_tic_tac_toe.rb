@@ -52,4 +52,28 @@ class TestTicTacToe < Minitest::Test
   def test_invalid_winner
     refute TicTacToe.winner("ox  o xox")
   end
+
+  def test_win_move
+    assert_equal TicTacToe.win(" oxxo    "), " oxxo  o "
+  end
+
+  def test_block_move
+    assert_equal TicTacToe.block(" xoox    "), " xoox  o "
+  end
+
+  def test_center_move
+    assert_equal TicTacToe.center("         "), "    o    "
+  end
+
+  def test_empty_corner_move
+    assert_equal TicTacToe.empty_corner("         "), "o        "
+  end
+
+  def test_empty_side_move
+    assert_equal TicTacToe.empty_side("         "), " o       "
+  end
+
+  def test_play
+    assert_equal TicTacToe.play("         "), "    o    "
+  end
 end
