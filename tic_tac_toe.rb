@@ -30,7 +30,7 @@ module TicTacToe
     end
 
     def self.winner(str)
-        row_win(str) || col_win(str)
+        row_win(str) || col_win(str) || dia_win(str)
     end
 
     def self.row_win(str)
@@ -49,5 +49,12 @@ module TicTacToe
             return true if in_a_row.uniq.size < 2
         end
         false
+    end
+
+    def self.dia_win(str)
+        board = to_board(str)
+        ldia = [board[0][0], board[1][1], board[2][2]].uniq.size < 2
+        rdia = [board[2][0], board[1][1], board[0][2]].uniq.size < 2
+        ldia || rdia
     end
 end
